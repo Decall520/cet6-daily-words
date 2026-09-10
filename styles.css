@@ -874,3 +874,34 @@ footer p {
     animation-iteration-count: 1 !important;
   }
 }
+
+.extra-section {
+  padding: 8px 0 44px;
+}
+
+.section-heading--extra {
+  margin-top: 30px;
+}
+
+.extra-section__hint {
+  margin: -10px 0 22px;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.secondary-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  transform: none;
+}
+
+.secondary-button:disabled:hover {
+  border-color: var(--line);
+  background: var(--surface);
+  color: var(--muted-strong);
+  transform: none;
+}
+
+.completion-banner--extra {
+  margin-top: 26px;
+}
