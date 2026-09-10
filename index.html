@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f7f3">
+  <meta name="description" content="每天自动推送 10 个六级英语单词，包含中文释义、多个词义和双语例句。">
+  <title>六级 · 每日十词</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script defer src="./data/words.js"></script>
+  <script defer src="./app.js"></script>
+</head>
+<body>
+  <div class="page-glow page-glow--one" aria-hidden="true"></div>
+  <div class="page-glow page-glow--two" aria-hidden="true"></div>
+
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="六级每日十词首页">
+        <span class="brand__mark">6</span>
+        <span>
+          <strong>每日十词</strong>
+          <small>CET-6 Vocabulary</small>
+        </span>
+      </a>
+
+      <div class="topbar__actions">
+        <span class="streak-pill">连续打卡 <strong id="streakCount">0</strong> 天</span>
+        <button class="icon-button" id="themeToggle" type="button" aria-label="切换深色模式" title="切换主题">
+          <span id="themeIcon" aria-hidden="true">☾</span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="pageTitle">
+        <div class="hero__copy">
+          <p class="eyebrow" id="todayLabel">今日学习</p>
+          <h1 id="pageTitle">每天十个词，<span>稳稳过六级。</span></h1>
+          <p class="hero__description">打开网页就会为你准备好今天的单词。读释义、看例句，掌握一个就勾选一个。</p>
+          <div class="hero__actions">
+            <button class="primary-button" id="startButton" type="button">开始背诵</button>
+            <button class="secondary-button" id="resetButton" type="button">重置今日进度</button>
+          </div>
+        </div>
+
+        <div class="progress-card" aria-label="今日学习进度">
+          <div class="progress-ring" id="progressRing">
+            <svg viewBox="0 0 128 128" role="img" aria-labelledby="ringTitle ringDescription">
+              <title id="ringTitle">今日学习进度</title>
+              <desc id="ringDescription">已掌握 0 个，共 10 个单词</desc>
+              <circle class="progress-ring__track" cx="64" cy="64" r="52"></circle>
+              <circle class="progress-ring__value" id="progressCircle" cx="64" cy="64" r="52"></circle>
+            </svg>
+            <div class="progress-ring__label">
+              <strong id="progressPercent">0%</strong>
+              <span>今日进度</span>
+            </div>
+          </div>
+          <div class="progress-card__details">
+            <p>今日已掌握</p>
+            <strong><span id="checkedCount">0</span><small> / 10</small></strong>
+            <span class="progress-card__hint" id="progressHint">大约需要 8 分钟</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="words-section" id="wordsSection" aria-labelledby="wordsTitle">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Today's words</p>
+            <h2 id="wordsTitle">今日单词</h2>
+          </div>
+          <p class="section-heading__note">单词顺序每天固定，刷新不会变化</p>
+        </div>
+        <div class="word-grid" id="wordGrid"></div>
+      </section>
+
+      <section class="completion-banner" id="completionBanner" aria-live="polite" hidden>
+        <div class="completion-banner__icon" aria-hidden="true">✓</div>
+        <div>
+          <p class="eyebrow">Daily complete</p>
+          <h2>今天的十个单词全部掌握</h2>
+          <p>做得很好。明天打开网页，会自动换一组新的单词。</p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>不依赖账号，学习进度只保存在当前浏览器中。</p>
+      <p>愿每一个小勾选，都算数。</p>
+    </footer>
+  </div>
+
+  <template id="wordCardTemplate">
+    <article class="word-card">
+      <header class="word-card__top">
+        <span class="word-index"></span>
+        <button class="check-button" type="button" data-action="toggle" aria-label="标记为已掌握">
+          <span aria-hidden="true">✓</span>
+        </button>
+      </header>
+
+      <div class="word-heading">
+        <div>
+          <h3 class="word-title"></h3>
+          <p class="word-phonetic"></p>
+        </div>
+        <button class="speak-button" type="button" data-action="speak" aria-label="朗读单词">
+          <span aria-hidden="true">▶</span> 发音
+        </button>
+      </div>
+
+      <ul class="meaning-list"></ul>
+
+      <div class="example-block">
+        <p class="example-block__title">例句</p>
+        <ol class="example-list"></ol>
+      </div>
+
+      <button class="master-button" type="button" data-action="toggle">标记已掌握</button>
+    </article>
+  </template>
+</body>
+</html>
