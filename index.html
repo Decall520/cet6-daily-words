@@ -83,6 +83,26 @@
           <p>做得很好。明天打开网页，会自动换一组新的单词。</p>
         </div>
       </section>
+
+      <section class="extra-section" id="extraSection" aria-labelledby="extraTitle">
+        <div class="section-heading section-heading--extra">
+          <div>
+            <p class="eyebrow">Study ahead</p>
+            <h2 id="extraTitle">提前背单词</h2>
+          </div>
+          <button class="secondary-button" id="extraButton" type="button">提前背 10 个</button>
+        </div>
+        <p class="extra-section__hint" id="extraHint">完成今日任务后，可以再提前背一组。每轮 10 个，从今天尚未出现的词库中挑选。</p>
+        <div class="word-grid" id="extraGrid"></div>
+        <section class="completion-banner completion-banner--extra" id="extraCompletionBanner" aria-live="polite" hidden>
+          <div class="completion-banner__icon" aria-hidden="true">✓</div>
+          <div>
+            <p class="eyebrow">Extra complete</p>
+            <h2>本组加练完成</h2>
+            <p>还可以继续加练下一组，保持状态。</p>
+          </div>
+        </section>
+      </section>
     </main>
 
     <footer>
