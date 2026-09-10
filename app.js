@@ -23,6 +23,7 @@
     wordCardTemplate: document.getElementById("wordCardTemplate"),
     completionBanner: document.getElementById("completionBanner"),
     extraGrid: document.getElementById("extraGrid"),
+    extraButtonTop: document.getElementById("extraButtonTop"),
     extraButton: document.getElementById("extraButton"),
     extraHint: document.getElementById("extraHint"),
     extraCompletionBanner: document.getElementById("extraCompletionBanner")
@@ -54,6 +55,7 @@
     });
 
     elements.extraButton.addEventListener("click", addExtraWords);
+    elements.extraButtonTop.addEventListener("click", addExtraWords);
 
     elements.startButton.addEventListener("click", () => {
       const firstUnchecked = elements.wordGrid.querySelector(".word-card:not(.is-checked)");
@@ -301,23 +303,32 @@
     const extraComplete = extraTotal > 0 && extraDone === extraTotal;
 
     elements.extraCompletionBanner.hidden = !extraComplete;
-    elements.extraButton.disabled = extraTotal > 0 && !extraComplete;
+    const extraButtons = [elements.extraButton, elements.extraButtonTop];
+    extraButtons.forEach((button) => {
+      button.disabled = extraTotal > 0 && !extraComplete;
+    });
 
     if (extraTotal === 0) {
       elements.extraHint.textContent = "完成今日任务后，可以再提前背一组。每轮 10 个，从今天尚未出现的词库中挑选。";
-      elements.extraButton.textContent = "提前背 10 个";
-      elements.extraButton.title = "从剩余词库中提前学习 10 个单词";
+      extraButtons.forEach((button) => {
+        button.textContent = "提前背 10 个";
+        button.title = "从剩余词库中提前学习 10 个单词";
+      });
       return;
     }
 
     if (extraComplete) {
       elements.extraHint.textContent = `本组加练已完成：${extraDone} / ${extraTotal}。可以继续加练下一组。`;
-      elements.extraButton.textContent = "继续加练 10 个";
-      elements.extraButton.title = "继续从剩余词库中学习 10 个单词";
+      extraButtons.forEach((button) => {
+        button.textContent = "继续加练 10 个";
+        button.title = "继续从剩余词库中学习 10 个单词";
+      });
     } else {
       elements.extraHint.textContent = `提前背进度：${extraDone} / ${extraTotal}。完成本组后可继续加练。`;
-      elements.extraButton.textContent = "完成当前加练后继续";
-      elements.extraButton.title = "先掌握当前加练单词，再开始下一组";
+      extraButtons.forEach((button) => {
+        button.textContent = "完成当前加练后继续";
+        button.title = "先掌握当前加练单词，再开始下一组";
+      });
     }
   }
 
